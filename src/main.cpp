@@ -830,15 +830,92 @@ uint256 static GetOrphanRoot(const CBlock* pblock)
 
 int64 GetBlockValue(int nHeight, int64 nFees) {
 
-    int64 nSubsidy = 50 * COIN;
-    // 25 PXC per block between the 3rd and 4th hard fork
-    // 25 PXC per block before the 1st testnet hard fork
-    if(((nHeight >= nForkThree) && (nHeight < nForkFour)) || (fTestNet && (nHeight < nTestnetForkOne)))
-      nSubsidy = 25 * COIN;
+    int64 nSubsidy = 0 * COIN;
 
-    // Block reward halves every 1M blocks (~2.85 years)
-    nSubsidy >>= (nHeight / 1000000);
+if (nHeight <= 2)
 
+        nSubsidy = 0;
+
+	else if (nHeight == 3)
+
+        nSubsidy = 200 * COIN;
+
+	else if (nHeight <= 515)
+
+        nSubsidy = 1 * COIN;
+
+	else if (nHeight == 516)
+
+        nSubsidy = 100 * COIN;
+
+	else if (nHeight <= 2725)
+
+        nSubsidy = 0.25 * COIN;
+    
+    else if (nHeight == 2726)
+
+        nSubsidy = 500 * COIN;
+    
+    else if (nHeight <= 8000)
+
+        nSubsidy = 0.15 * COIN;
+   
+    else if (nHeight == 8001)
+
+        nSubsidy = 1000 * COIN;
+    
+    else if (nHeight <= 25000)
+
+        nSubsidy = 0.10 * COIN;
+
+    else if (nHeight == 25001)
+
+        nSubsidy = 250 * COIN;
+    
+    else if (nHeight <= 27026)
+
+        nSubsidy = 0.50 * COIN;
+    
+    else if (nHeight == 27027)
+
+        nSubsidy = 750 * COIN;
+    
+    else if (nHeight <= 45000)
+
+        nSubsidy = 0.35 * COIN;
+    
+    else if (nHeight == 45001)
+
+        nSubsidy = 4000 * COIN;
+    
+    else if (nHeight <= 172000)
+
+        nSubsidy = 0.75 * COIN;
+    
+    else if (nHeight == 172001)
+
+        nSubsidy = 8000 * COIN;
+    
+    else if (nHeight <= 480000)
+
+        nSubsidy = 1.25 * COIN;
+    
+    else if (nHeight == 480001)
+
+        nSubsidy = 25000 * COIN;
+    
+    else if (nHeight <= 999999)
+
+        nSubsidy = 0.95 * COIN;
+    
+    else if (nHeight <= 1000000)
+
+        nSubsidy = 50000 * COIN;
+    
+    else if (nHeight <= 2000000)
+
+        nSubsidy = 2.50 * COIN;
+    
     return nSubsidy + nFees;
 }
 
